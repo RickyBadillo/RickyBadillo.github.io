@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <form>
+    <p>
+      <label for="movie">movie</label>
+      <input type="text" name="movie" id="movie">
+    </p>
+    <p>
+      <label for="actor">actor</label>
+      <input type="text" name="actor" id="actor">
+   </p>
+    <p>
+      <label for="episodes">episodes</label>
+      <input type="text" name="episodes" id="episodes">
+    </p>
+    <p>
+      <label for="director">director</label>
+      <input type="text" name="director" id="director">
+    </p>
+    <button id="submit">Submit</button>
+  </form>
+  <div id="users"></div>
+   <script>
+
+    const users = [
+      {
+        movie: 'Asobi Asobase',
+        actor: 'Olivia',
+        episodes: '12',
+        director: 'KyoAni'
+      },
+      {
+        movie: 'Miss Kobayashi Dragon Maid',
+        actor: 'Tohru',
+        episodes: '27',
+        director: 'KyoAni'
+      },
+     {
+       movie: 'Hunter x Hunter',
+       actor: 'Gon',
+       episodes: '148',
+       director: 'Yoshihiro Tagashi'
+      }
+    ]
+
+    for (let i = 0; i < users.length; i++) {
+      let userElem = document.createElement('div')
+        userElem.innerHTML = `
+        <h1>${users[i].movie}</h1>
+        <h2>${users[i].actor}</h2>
+        <h3>${users[i].episodes}</h3>
+        <h4>${users[i].director}</h4>
+        <button class="delete">delete</button>
+        <hr>
+      `
+      document.getElementById('users').append(userElem)
+    }
+      
+    document.getElementById('submit').addEventListener('click', event => {
+      event.preventDefault()
+
+      console.log(document.getElementById('movie').value)
+      console.log(document.getElementById('actor').value)
+      console.log(document.getElementById('episodes').value)
+      console.log(document.getElementById('director').value)
+
+      let userElem = document.createElement('div')
+      userElem.innerHTML = `
+        <h1>${document.getElementById('movie').value}
+        <h2>${document.getElementById('actor').value}</h2>
+        <h3>${document.getElementById('episodes').value}</h3>
+        <h4>${document.getElementById('director').value}</h4>
+        <button class="delete">delete</button>
+        <hr>
+      `
+      document.getElementById('users').append(userElem)
+
+      document.getElementById('movie').value = ''
+      document.getElementById('actor').value = ''
+      document.getElementById('episodes').value = ''
+      document.getElementById('director').value = ''
+
+    })
+
+    document.addEventListener('click', event => {
+      if(event.target.className === 'delete') {
+        event.target.parentNode.remove()
+      }
+    })
+
+  </script>
+  
+</body>
+</html>
